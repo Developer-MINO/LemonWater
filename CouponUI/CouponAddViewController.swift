@@ -40,17 +40,17 @@ class CouponAddViewController: UIViewController, UIImagePickerControllerDelegate
     //버튼 숨김 기능을 위한 버튼 아울렛.
     @IBOutlet weak var deleteButton: UIButton!
    
-    //로고를 선택하면 데이터베이스의 로고를 불러오기 위한 버튼액션(현재는 사진첩으로 가게해놓음)
-    @IBAction func picturePickerPressed(_ sender: UIButton) {
-        present(imagePicker, animated: true, completion: nil)
-    }
+//    //로고를 선택하면 데이터베이스의 로고를 불러오기 위한 버튼액션(현재는 사진첩으로 가게해놓음)
+//    @IBAction func picturePickerPressed(_ sender: UIButton) {
+//        present(imagePicker, animated: true, completion: nil)
+//    }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let img = info[UIImagePickerControllerOriginalImage] as? UIImage{
-            logo.image = img
-        }
-        imagePicker.dismiss(animated: true, completion: nil)
-    }
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+//        if let img = info[UIImagePickerControllerOriginalImage] as? UIImage{
+//            logo.image = img
+//        }
+//        imagePicker.dismiss(animated: true, completion: nil)
+//    }
     
     @IBOutlet weak var product: UITextField!
     @IBOutlet weak var barcode: UITextField!
@@ -152,7 +152,7 @@ class CouponAddViewController: UIViewController, UIImagePickerControllerDelegate
         }
         
         ad.saveContext()
-        _ = navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popToRootViewController(animated: true)
         }
     }
     
@@ -174,15 +174,14 @@ class CouponAddViewController: UIViewController, UIImagePickerControllerDelegate
         var parsingBrain: ParsingBrain
         var couponInfo: ParsingBrain.CouponInfo
         
-        
         //상품명 텍스트 필드를 최초 응답자로 지정(스토리보드 내에서 dock을 이용해도 가능).
         if ad.isAddButton == true {
             self.product.becomeFirstResponder()
         }
         //화면 전환시 입력창 바로 반응
         
-        imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
+//        imagePicker = UIImagePickerController()
+//        imagePicker.delegate = self
         if couponToEdit != nil {
             loadCouponData()
         }
@@ -194,7 +193,7 @@ class CouponAddViewController: UIViewController, UIImagePickerControllerDelegate
             deleteButton.isHidden = true
             
             //클립보드 파싱 버튼을 눌렀을 때 자동으로 텍스트필드 입력.
-            if ad.selectActionSheet == 1 {
+            if ad.isClipboardActionSheet == true {
                 parsingBrain = ParsingBrain()
                 if let copiedString = UIPasteboard.general.strings {
                     couponInfo = parsingBrain.parsing(textFromClipboard: copiedString)
@@ -205,27 +204,33 @@ class CouponAddViewController: UIViewController, UIImagePickerControllerDelegate
                 }
             }
             //OCR 버튼을 눌렀을 때 이미지 OCR 후 바코드만 입력.
-            else if ad.selectActionSheet == 2 {
-                if let tesseract = G8Tesseract(language: "eng+kor") {
-                    tesseract.delegate = self
-                    //tesseract.charWhitelist = "0123456789"
-                    tesseract.image = UIImage(named: "kakao")?.g8_grayScale()    //.g8_blackAndWhite()
-                    tesseract.recognize()
-                    
-                    //현재는 originalText에 OCR을 표시하도록 함.
-                    originalText.text = tesseract.recognizedText
-                }
+            else if ad.isClipboardActionSheet == false {
+//                //파싱 퍼센트 표시 알림창.
+//                func progressImageRecognition(for tesseract: G8Tesseract!) {
+//                    let progress = UIAlertController(title: "알림", message: "Recognition Progress: \(tesseract.progress)%", preferredStyle: UIAlertControllerStyle.alert)
+//                    self.present(progress, animated: true)
+//                
+//                    if tesseract.progress >= 90 {
+//                        self.dismiss(animated: true)
+//                    }
+//                }
+                
+//                if let tesseract = G8Tesseract(language: "eng+kor") {
+//                    tesseract.delegate = self
+//                    //tesseract.charWhitelist = "0123456789"
+//                    tesseract.image = UIImage(named: "gifticon_cu")?.g8_grayScale()    //.g8_blackAndWhite()
+//                    tesseract.recognize()
+//                    
+//                    parsingOCR = ParsingOCR()
+//                    OCRCouponInfo = parsingOCR.parsing(textFromClipboard: tesseract.recognizedText)
+//                    barcode.text = OCRCouponInfo.barcode
+//                    originalText.text = OCRCouponInfo.originalText
+//                }
             }
-            
-            //        //사용자 입력 버튼을 눌렀을 때 빈칸(또는 이벤트 처리 안함).
-            //        else {
-            //
-            //        }
         }
         //수정 버튼을 눌렀을 때 타이틀과 버튼 이름 변경.
         else {
             self.navigationItem.title = "쿠폰 수정"
-            //self.navigationItem.rightBarButtonItem?.title = "확인"
             loadCouponData()
         }
         
@@ -246,10 +251,13 @@ class CouponAddViewController: UIViewController, UIImagePickerControllerDelegate
         
         //키보드 위에 버튼 표시.
         let keyboardToolbar = UIToolbar()
+        keyboardToolbar.barStyle = .default
+        keyboardToolbar.isTranslucent = true
         keyboardToolbar.sizeToFit()
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         let doneBarButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+        //let nextBarButton = UIBarButtonItem(image: UIImage(named: "keyboardPreviousButton"), style: .plain, target: self, action: "")
         keyboardToolbar.setItems([flexibleSpace, doneBarButton], animated: true)
         
         product.inputAccessoryView = keyboardToolbar
@@ -260,6 +268,40 @@ class CouponAddViewController: UIViewController, UIImagePickerControllerDelegate
         //키보드 크기만큼 뷰를 위로 이동.
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+    }
+    
+    //OCR
+    override func viewDidAppear(_ animated: Bool) {
+        var parsingOCR: ParsingOCR
+        var OCRCouponInfo: ParsingOCR.CouponInfo
+        
+        if ad.isAddButton == true && ad.isClipboardActionSheet == false {
+            if let tesseract = G8Tesseract(language: "eng+kor") {
+                tesseract.delegate = self
+                //tesseract.charWhitelist = "0123456789"
+                tesseract.image = UIImage(named: "gifticon_cu")?.g8_grayScale()    //.g8_blackAndWhite()
+                tesseract.recognize()
+            
+                parsingOCR = ParsingOCR()
+                OCRCouponInfo = parsingOCR.parsing(textFromClipboard: tesseract.recognizedText)
+                barcode.text = OCRCouponInfo.barcode
+                originalText.text = OCRCouponInfo.originalText
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //파싱 퍼센트 표시 알림창.
+        if ad.isAddButton == true && ad.isClipboardActionSheet == false {
+            func progressImageRecognition(for tesseract: G8Tesseract!) {
+                let progress = UIAlertController(title: "알림", message: "Recognition Progress: \(tesseract.progress)%", preferredStyle: UIAlertControllerStyle.alert)
+                self.present(progress, animated: true)
+            
+                if tesseract.progress >= 90 {
+                    self.dismiss(animated: true)
+                }
+            }
+        }
     }
     
     
@@ -289,6 +331,19 @@ class CouponAddViewController: UIViewController, UIImagePickerControllerDelegate
     func progressImageRecognition(for tesseract: G8Tesseract!) {
         print("Recognition Progress \(tesseract.progress)%")
     }
+    
+//    //사진 앱 접근을 위한 메소드.
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+//        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+//            logo.image = image
+//        }
+////        imagePicker.dismiss(animated: true, completion: nil)
+//        self.dismiss(animated: true, completion: nil)
+//    }
+//    
+//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+//        self.dismiss(animated: true, completion: nil)
+//    }
     
     //텍스트 필드가 아닌 곳을 터치했을 때 키보드 닫기.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -320,3 +375,16 @@ class CouponAddViewController: UIViewController, UIImagePickerControllerDelegate
     }
     */
 }
+
+
+////extension 부분
+//
+//extension CouponAddViewController : logoData {
+//    
+//    func updataData(data: UIImage) {
+//        
+//        logo.image = data
+//        
+//    }
+//    
+//}

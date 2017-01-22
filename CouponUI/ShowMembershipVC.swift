@@ -28,12 +28,13 @@ class ShowMembershipVC: UIViewController {
     //viewLoad
     //
     override func viewWillDisappear(_ animated: Bool) {
-        ap.brightSwitch = false
+        ad.brightSwitch = false
+        UIScreen.main.brightness = ad.bright!
         //화면이 사라질때 밝기 수정 off
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        ap.brightSwitch = true
+        ad.brightSwitch = true
         //현재 페이지에선 밝기 수정 on
         
         if cellData != nil {
@@ -43,6 +44,21 @@ class ShowMembershipVC: UIViewController {
         if let topItem = self.navigationController?.navigationBar.topItem {
             topItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         }
+        
+        //타이틀 명 변경
+        if let memebership = cellData{
+            self.navigationItem.title = memebership.toBrand?.title
+            }
+        
+        //하단에 그림자 추가
+        ShowLogo.layer.borderColor = UIColor.gray.cgColor
+        ShowLogo.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        ShowLogo.layer.shadowOffset = CGSize(width : 0,height: 2.0)
+        ShowLogo.layer.shadowOpacity = 0.5
+        ShowLogo.layer.shadowRadius = 0.0
+        ShowLogo.layer.masksToBounds = false
+        ShowLogo.layer.cornerRadius = 10.0
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -54,10 +70,7 @@ class ShowMembershipVC: UIViewController {
         
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        UIScreen.main.brightness = ap.bright!
-    }
-    
+
     //
     //controller
     //
