@@ -60,7 +60,7 @@
             }
             
             if UIImage(named:"symbol\(row)") != nil {
-                martLogo.append(UIImage(named:"symbol\(row)")!)
+                symbolLogo.append(UIImage(named:"symbol\(row)")!)
             }
         }
     }
@@ -76,7 +76,7 @@
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //테이블뷰 프로토콜
-        return 6
+        return 7
     }
     
     
