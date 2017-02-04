@@ -78,6 +78,8 @@ extension UIViewController {
     
 }
 
+
+
 extension UIViewController {
     func addInputAccessoryForTextFields(textFields: [UITextField], dismissable: Bool = true, previousNextable: Bool = false) {
         for (index, textField) in textFields.enumerated() {
