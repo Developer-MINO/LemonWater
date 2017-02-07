@@ -77,24 +77,64 @@ class MembershipCollectionVC: UIViewController, UICollectionViewDelegate, UIColl
             // do stuff with your cell, for example print the indexPath
             print(index.row)
             
+            
+            
             if let objs = controller.fetchedObjects, objs.count > 0 {
                 let item = objs[(indexPath?.item)!]
                 let favoriteContext = Favorite(context: context)
         
-                if item.favorite == true {
-                    item.favorite = false
-                    context.delete(item.toFavorite!)
+                
+                if item.favorite == false {
+                    let alert = UIAlertController(title: "즐겨찾기 추가", message: "\"\((item.toBrand?.title)!)\" 멤버십을 \n즐겨찾기에 추가하시겠습니까?", preferredStyle: .alert)
+                    let add = UIAlertAction(title: "추가", style: .default) {
+                        (_) in
+                        item.favorite = true
+                        
+                        favoriteContext.isMembership = true
+                        favoriteContext.index = 0
+                        item.toFavorite = favoriteContext
+                        ad.saveContext()
+                        self.collectionView.reloadData()
+                    }
                     
-                } else {
-                    item.favorite = true
-                    
-                    favoriteContext.isMembership = true
-                    favoriteContext.index = 0
-                    item.toFavorite = favoriteContext
+                    let cancel = UIAlertAction(title: "취소", style: .cancel)
+                    alert.addAction(add)
+                    alert.addAction(cancel)
+                    self.present(alert, animated: true)
                 }
-                ad.saveContext()
-                collectionView.reloadData()
-            
+                else {
+                    let alert = UIAlertController(title: "즐겨찾기 제거", message: "\"\((item.toBrand?.title)!)\" 멤버십을 \n즐겨찾기에서 제거하시겠습니까?", preferredStyle: .alert)
+                    let add = UIAlertAction(title: "제거", style: .default) {
+                        (_) in
+                        item.favorite = false
+                        
+                        context.delete(item.toFavorite!)
+                        ad.saveContext()
+                        self.collectionView.reloadData()
+                    }
+                    
+                    let cancel = UIAlertAction(title: "취소", style: .cancel)
+                    alert.addAction(add)
+                    alert.addAction(cancel)
+                    self.present(alert, animated: true)
+                }
+
+                
+                
+//                if item.favorite == true {
+//                    item.favorite = false
+//                    context.delete(item.toFavorite!)
+//                    
+//                } else {
+//                    item.favorite = true
+//                    
+//                    favoriteContext.isMembership = true
+//                    favoriteContext.index = 0
+//                    item.toFavorite = favoriteContext
+//                }
+//                ad.saveContext()
+//                collectionView.reloadData()
+//            
             }
 
         } else {
