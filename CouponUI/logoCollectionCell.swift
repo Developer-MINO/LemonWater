@@ -15,4 +15,7 @@ class logoCollectionCell : UICollectionViewCell {
     @IBOutlet weak var logo: UIImageView!
     
     @IBOutlet weak var brand: UILabel!
+    
+    
+    
 }

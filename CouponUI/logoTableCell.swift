@@ -28,6 +28,8 @@ extension logoTableCell {
         categoryCollection.setContentOffset(categoryCollection.contentOffset, animated: false)
         categoryCollection.reloadData()
         
+
+
     }
     
     var collectionViewOffset: CGFloat {
