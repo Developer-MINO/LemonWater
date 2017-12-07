@@ -14,14 +14,14 @@ import UIKit
 extension String {
     //String 사이에 String 넣기
     func insert(string:String,ind:Int) -> String {
-        return  String(self.characters.prefix(ind)) + string + String(self.characters.suffix(self.characters.count-ind))
+        return  String(self.prefix(ind)) + string + String(self.suffix(self.count-ind))
     }
 }
 
 //바코드 4자리 마다 하이픈 넣어주기
 func addHyphen(data:String) -> String {
     var barcode = data
-    let stringCount = barcode.characters.count
+    let stringCount = barcode.count
     
     var i : Int = 1
     

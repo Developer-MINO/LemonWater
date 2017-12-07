@@ -279,7 +279,7 @@ func originalParsing(a :String) -> String {
         
         if let intVal = String(components) {
             
-            if intVal.characters.count > 11 {
+            if intVal.count > 11 {
                 returnValue = intVal
                 
             }
