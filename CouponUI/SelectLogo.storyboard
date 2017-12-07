@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E192b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AppleSDGothicNeo.ttc">
+            <string>AppleSDGothicNeo-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Logo Select-->
         <scene sceneID="THS-o9-dc7">
             <objects>
-                <viewController storyboardIdentifier="SelectLogo" id="t2E-kZ-guc" customClass="logoSelect" customModule="MemebershipCoupon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectLogo" id="t2E-kZ-guc" customClass="logoSelect" customModule="MemCoo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OC5-3d-D5B"/>
                         <viewControllerLayoutGuide type="bottom" id="43w-qZ-t5o"/>
@@ -22,13 +27,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="137" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TEA-LI-mdG">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="137" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TEA-LI-mdG">
                                 <rect key="frame" x="0.0" y="60" width="375" height="607"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.96470588239999999" green="0.40000000000000002" blue="0.13725490200000001" alpha="0.78000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="categoryCell" rowHeight="137" id="Txf-kY-RDa" customClass="logoTableCell" customModule="MemebershipCoupon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="categoryCell" rowHeight="137" id="Txf-kY-RDa" customClass="logoTableCell" customModule="MemCoo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="137"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Txf-kY-RDa" id="SpV-Rd-WEE">
@@ -36,7 +40,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gIP-FX-qvU">
-                                                    <rect key="frame" x="0.0" y="46" width="375" height="90"/>
+                                                    <rect key="frame" x="0.0" y="49" width="375" height="87"/>
                                                     <color key="backgroundColor" red="0.99996548890000003" green="0.98047643900000003" blue="0.88825631140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qgA-99-45n">
                                                         <size key="itemSize" width="83" height="105"/>
@@ -45,8 +49,8 @@
                                                         <inset key="sectionInset" minX="8" minY="15" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="choiceCell" id="3pC-C4-hYn" customClass="logoCollectionCell" customModule="MemebershipCoupon" customModuleProvider="target">
-                                                            <rect key="frame" x="8" y="0.0" width="83" height="105"/>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="choiceCell" id="3pC-C4-hYn" customClass="logoCollectionCell" customModule="MemCoo" customModuleProvider="target">
+                                                            <rect key="frame" x="8" y="-1.5" width="83" height="105"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="83" height="105"/>
@@ -71,7 +75,7 @@
                                                     </cells>
                                                 </collectionView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhw-E1-Wjx">
-                                                    <rect key="frame" x="8" y="17" width="344" height="21"/>
+                                                    <rect key="frame" x="15" y="20" width="330" height="21"/>
                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="17"/>
                                                     <color key="textColor" red="0.96470588239999999" green="0.40000000000000002" blue="0.13725490200000001" alpha="0.78000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -101,9 +105,8 @@
                                     <outlet property="delegate" destination="t2E-kZ-guc" id="GHt-lV-N77"/>
                                 </connections>
                             </tableView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ouo-M6-obw">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ouo-M6-obw">
+                                <rect key="frame" x="0.0" y="16" width="375" height="44"/>
                                 <color key="barTintColor" red="1" green="0.85490196080000003" blue="0.56078431370000004" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem title="Title" id="XaR-Wo-SHB">
@@ -119,6 +122,16 @@
                                 </userDefinedRuntimeAttributes>
                             </navigationBar>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="TEA-LI-mdG" secondAttribute="trailing" id="2ip-V9-Owo"/>
+                            <constraint firstItem="ouo-M6-obw" firstAttribute="top" secondItem="M0f-C8-bmT" secondAttribute="top" constant="16" id="36f-7u-Mog"/>
+                            <constraint firstAttribute="bottom" secondItem="TEA-LI-mdG" secondAttribute="bottom" id="6Dq-9v-iQM"/>
+                            <constraint firstItem="TEA-LI-mdG" firstAttribute="leading" secondItem="M0f-C8-bmT" secondAttribute="leading" id="F3Y-do-6tL"/>
+                            <constraint firstItem="TEA-LI-mdG" firstAttribute="top" secondItem="ouo-M6-obw" secondAttribute="bottom" id="P3s-u6-j4D"/>
+                            <constraint firstItem="TEA-LI-mdG" firstAttribute="top" secondItem="ouo-M6-obw" secondAttribute="bottom" id="Uyd-U4-iFp"/>
+                            <constraint firstAttribute="trailing" secondItem="ouo-M6-obw" secondAttribute="trailing" id="ibA-a2-Zm0"/>
+                            <constraint firstItem="ouo-M6-obw" firstAttribute="leading" secondItem="M0f-C8-bmT" secondAttribute="leading" id="m1d-SU-Cp2"/>
+                        </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
