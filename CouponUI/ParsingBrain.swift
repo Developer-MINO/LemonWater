@@ -101,7 +101,7 @@ class ParsingBrain {
                             //
                             //
                             if refineContent2.contains(",") {
-                                let multipleCouponNo = refineContent2.components(separatedBy: ",")
+                                _ = refineContent2.components(separatedBy: ",")
                             }
                             
                             

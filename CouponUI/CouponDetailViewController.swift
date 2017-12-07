@@ -27,8 +27,8 @@ class CouponDetailViewController: UIViewController, UINavigationControllerDelega
     var bright : CGFloat?
     
     @IBAction func finishButton(_ sender: UIButton) {
-        print("isFavorite = \(self.couponToDetail?.isFavorite)")
-        print("isUsed = \(self.couponToDetail?.isUsed)")
+        print("isFavorite = \(String(describing: self.couponToDetail?.isFavorite))")
+        print("isUsed = \(String(describing: self.couponToDetail?.isUsed))")
         
         if self.couponToDetail?.isUsed == false {
             let alert = UIAlertController(title: "사용 완료", message: "사용 완료하시겠습니까?", preferredStyle: .alert)
@@ -45,8 +45,8 @@ class CouponDetailViewController: UIViewController, UINavigationControllerDelega
                         //favoriteContext.index = 0
                         //self.couponToDetail?.toFavorite = favoriteContext
                     }
-                    print("isFavorite = \(self.couponToDetail?.isFavorite)")
-                    print("isUsed = \(self.couponToDetail?.isUsed)")
+                    print("isFavorite = \(String(describing: self.couponToDetail?.isFavorite))")
+                    print("isUsed = \(String(describing: self.couponToDetail?.isUsed))")
                     ad.saveContext()
                 }
                 _ = self.navigationController?.popToRootViewController(animated: true)
@@ -63,8 +63,8 @@ class CouponDetailViewController: UIViewController, UINavigationControllerDelega
                 (_) in
                 if self.couponToDetail != nil {
                     self.couponToDetail?.isUsed = false
-                    print("isFavorite = \(self.couponToDetail?.isFavorite)")
-                    print("isUsed = \(self.couponToDetail?.isUsed)")
+                    print("isFavorite = \(String(describing: self.couponToDetail?.isFavorite))")
+                    print("isUsed = \(String(describing: self.couponToDetail?.isUsed))")
                     ad.saveContext()
                 }
                 _ = self.navigationController?.popToRootViewController(animated: true)
@@ -136,7 +136,7 @@ class CouponDetailViewController: UIViewController, UINavigationControllerDelega
         if let coupon = couponToDetail {
             barcode.text = addHyphen(data: coupon.barcode!)
             barcodeImg.image = generateBarcodeFromString(string: coupon.barcode)
-            expireDate.text = displayTheDate(theDate: coupon.expireDate as! Date)
+            expireDate.text = displayTheDate(theDate: coupon.expireDate! as Date)
             logoImage.image = coupon.toImage?.image as! UIImage?
             titleName = coupon.title
             originalText = coupon.originalText
@@ -161,7 +161,7 @@ class CouponDetailViewController: UIViewController, UINavigationControllerDelega
                 destination.titleName = titleName
                 
                 if originalText != "" {
-                    print("\(originalText)")
+                
                     destination.originalText = originalText
                 }
                 
