@@ -78,7 +78,7 @@ class CouponAddViewController: UIViewController, UIImagePickerControllerDelegate
     }
     
     //타겟시 데이트피커의 값을 텍스트 필드에 넣어주기 위한 펑션
-    func datePickerValueChanged(sender: UIDatePicker) {
+    @objc func datePickerValueChanged(sender: UIDatePicker) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         expiredDate.text = dateFormatter.string(from: sender.date)
@@ -180,7 +180,7 @@ class CouponAddViewController: UIViewController, UIImagePickerControllerDelegate
             product.text = coupon.title
             barcode.text = coupon.barcode
             barcodeImg.image = generateBarcodeFromString(string: barcode.text)
-            expiredDate.text = displayTheDate(theDate: coupon.expireDate as! Date)
+            expiredDate.text = displayTheDate(theDate: coupon.expireDate! as Date)
             logo.image = coupon.toImage?.image as? UIImage
             originalText.text = coupon.originalText
         }
@@ -264,25 +264,23 @@ class CouponAddViewController: UIViewController, UIImagePickerControllerDelegate
         
         for item in Arr {
             let components = item.components(separatedBy: CharacterSet.decimalDigits.inverted).joined(separator:"")
-            
-            if let intVal = String(components) {
-                
-                if intVal.count > 4 && intVal.count < 12 {
-                    let first3 = intVal.substring(to : intVal.index(intVal.startIndex, offsetBy:3))
-                    if first3 == "201" || first3 == "202" {
-                        returnValue = returnValue + "\(intVal) <<기간일 확률이 높습니다. \n"
-                    } else {
-                        returnValue = returnValue + "\(intVal) \n"
-                    }
-                    
-                } else if intVal.count > 11 {
-                    returnValue = returnValue + addHyphen(data: intVal) + "<<코드일 확률이 높습니다.\n"
-                    self.barcode.text = intVal
-                    
+        
+            if String(components).count > 4 && String(components).count < 12 {
+                let first3 = String(components).substring(to : String(components).index(String(components).startIndex, offsetBy:3))
+                if first3 == "201" || first3 == "202" {
+                    returnValue = returnValue + "\(String(components)) <<기간일 확률이 높습니다. \n"
+                } else {
+                    returnValue = returnValue + "\(String(components)) \n"
                 }
                 
+            } else if String(components).count > 11 {
+                returnValue = returnValue + addHyphen(data: String(components)) + "<<코드일 확률이 높습니다.\n"
+                self.barcode.text = String(components)
                 
             }
+                
+                
+            
         }
         
         return returnValue
@@ -322,6 +320,7 @@ class CouponAddViewController: UIViewController, UIImagePickerControllerDelegate
     // 복분으로 인한 문자 입력 방지 및 여백 삭제
     @IBAction func codeTextField(_ sender: Any) {
         if barcode.text != "" {
+            barcode.text = numParsing(barcode.text!)
             if Double(barcode.text!)! > 10000000000000000000 {
                 barcode.text = ""
                 let color = UIColor.red

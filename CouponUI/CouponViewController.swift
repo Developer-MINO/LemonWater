@@ -119,7 +119,7 @@ class CouponViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     //long press gesture를 이용한 즐겨찾기 핸들링.
-    func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
+    @objc func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
         if longPressGestureRecognizer.state == UIGestureRecognizerState.began {
             let touchPoint = longPressGestureRecognizer.location(in: self.tableView)
             
@@ -346,7 +346,7 @@ class CouponViewController: UIViewController, UITableViewDataSource, UITableView
 
 extension UIViewController {
     //노티피케이션.
-    func catchIt(_ userInfo: Notification) {
+    @objc func catchIt(_ userInfo: Notification) {
         if userInfo.userInfo?["userInfo"] == nil {
             if let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "SimpleViewController") {
                 self.navigationController?.pushViewController(detailVC, animated: true)

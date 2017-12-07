@@ -113,7 +113,7 @@ class CouponDetailViewController: UIViewController, UINavigationControllerDelega
     }
     
     //밝기 제스쳐
-    func pan(recognizer:UIPanGestureRecognizer){
+    @objc func pan(recognizer:UIPanGestureRecognizer){
         if recognizer.state == UIGestureRecognizerState.changed || recognizer.state == UIGestureRecognizerState.ended {
             let velocity:CGPoint = recognizer.velocity(in: self.view)
             

@@ -75,7 +75,7 @@ extension UIViewController {
         view.addGestureRecognizer(tap)
      
     }
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     func moveFrame(){
@@ -84,7 +84,7 @@ extension UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(UIViewController.keyboardWillHide), name: Notification.Name.UIKeyboardWillHide, object: nil)
     }
     //프레임 위로이동
-    func keyboardWillShow(notification: Notification) {
+    @objc func keyboardWillShow(notification: Notification) {
         
      
         if ad.heightForKeyboard != nil {
@@ -100,7 +100,7 @@ extension UIViewController {
         }
     }
     //프레임 원위치
-    func keyboardWillHide(notification: Notification) {
+    @objc func keyboardWillHide(notification: Notification) {
         self.view.frame = CGRect(x: 0, y: 64, width: self.view.frame.width, height: self.view.frame.height)
         ad.heightForKeyboard = 2
     }
@@ -181,7 +181,7 @@ extension UIViewController {
         
         
     }
-    func datePickerTodayButton(_ a : UIBarButtonItem) {
+    @objc func datePickerTodayButton(_ a : UIBarButtonItem) {
         let vc = self as? CouponAddViewController
         let todaysDate = Date()
         let dateFormatter = DateFormatter()

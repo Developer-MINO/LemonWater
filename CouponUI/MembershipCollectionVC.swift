@@ -63,7 +63,7 @@ class MembershipCollectionVC: UIViewController, UICollectionViewDelegate, UIColl
         
     }
     
-    func handleLongPress(_ gestureReconizer: UILongPressGestureRecognizer) {
+    @objc func handleLongPress(_ gestureReconizer: UILongPressGestureRecognizer) {
         if gestureReconizer.state != UIGestureRecognizerState.began {
             return
         }

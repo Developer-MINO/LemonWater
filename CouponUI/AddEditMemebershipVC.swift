@@ -277,15 +277,14 @@ func originalParsing(a :String) -> String {
     for item in Arr {
         let components = item.components(separatedBy: CharacterSet.decimalDigits.inverted).joined(separator:"")
         
-        if let intVal = String(components) {
-            
-            if intVal.count > 11 {
-                returnValue = intVal
-                
-            }
-            
+        
+        if String(components).count > 11 {
+            returnValue = String(components)
             
         }
+            
+            
+        
     }
     
     return returnValue
