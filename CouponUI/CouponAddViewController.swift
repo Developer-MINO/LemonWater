@@ -266,6 +266,7 @@ class CouponAddViewController: UIViewController, UIImagePickerControllerDelegate
             let components = item.components(separatedBy: CharacterSet.decimalDigits.inverted).joined(separator:"")
         
             if String(components).count > 4 && String(components).count < 12 {
+                
                 let first3 = String(components).substring(to : String(components).index(String(components).startIndex, offsetBy:3))
                 if first3 == "201" || first3 == "202" {
                     returnValue = returnValue + "\(String(components)) <<기간일 확률이 높습니다. \n"
@@ -284,6 +285,7 @@ class CouponAddViewController: UIViewController, UIImagePickerControllerDelegate
         }
         
         return returnValue
+        
         
     }
     
